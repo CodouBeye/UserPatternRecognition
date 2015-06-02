@@ -7,32 +7,27 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Welcome!!" />
+        android:text="You have been registrated!!" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:onClick="onClickButton"
-        android:text="Try Again!"
-        android:id="@+id/retry" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Counter="
-        android:id="@+id/counter"
+        android:text="Home"
+        android:id="@+id/retry"
         android:layout_below="@+id/message"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp" />
+        android:layout_marginTop="110dp" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/user"
-        android:layout_above="@+id/retry"
-        android:layout_centerHorizontal="true" />
+        android:text="CLOSE"
+        android:onClick="onCloseButton"
+        android:id="@+id/button5"
+        android:layout_below="@+id/retry"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
 
 
 </RelativeLayout>

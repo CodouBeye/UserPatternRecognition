@@ -23,7 +23,7 @@ public class DataHandler {
     public static final String TABLE_NAME="user";
     public static final String DATA_BASE_NAME="patterndb";
     public static final int DATA_BASE_VERSION=1;
-    public static final String DATABASE_CREATE="create table user(id text not null ,trans_vect float,rot_vect float);";
+    public static final String DATABASE_CREATE="create table user(id text not null,trans_vect float,rot_vect float);";
 
     DataBaseHelper dbHelper;
     Context ctx;

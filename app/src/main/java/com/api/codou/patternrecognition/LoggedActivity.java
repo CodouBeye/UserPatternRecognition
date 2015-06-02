@@ -39,7 +39,7 @@ public class LoggedActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.database_view);
+        setContentView(R.layout.logged);
         dataSource = new DataHandler(this);
       /*  dataSource.open();
         Cursor cursor = dataSource.returnData();
@@ -72,6 +72,10 @@ public class LoggedActivity extends Activity {
         LoggedActivity.this.finish();
     }
 
+    public void onCloseButton(View v){
+        finish();
+        System.exit(0);
+    }
     @Override
     protected void onResume() {
 
@@ -131,7 +135,7 @@ public class LoggedActivity extends Activity {
             }
             if (success) {
 
-                myFile = new File(Environment.getExternalStorageDirectory() + "/SensorData_"/* + TimeStampDB +*/ + ".csv");
+                myFile = new File(Environment.getExternalStorageDirectory() + "/export_file/SensorData"/* + TimeStampDB +*/ + ".csv");
                 // MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{"/export_file/Export_" + TimeStampDB + ".csv"}, null, null);
                 myFile.createNewFile();
                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -152,8 +156,8 @@ public class LoggedActivity extends Activity {
 
                             getid = c.getString(0);
                             //getTime = c.getString(1);
-                            getTrans = c.getFloat(2);
-                            getRot = c.getFloat(3);
+                            getTrans = c.getFloat(1);
+                            getRot = c.getFloat(2);
 
                             myOutWriter.append(getid +  "," + getTrans + "," + getRot);
                             myOutWriter.append("\n");

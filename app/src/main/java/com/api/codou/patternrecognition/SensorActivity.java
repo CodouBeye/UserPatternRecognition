@@ -75,7 +75,7 @@ public class SensorActivity extends Activity {
     public DataHandler dataSource;
     float netForce = 0;
     float omegaMagnitude=0;
-    String userText;
+    String userText=null;
     int id;
 
     public void onClickButton(View v){
@@ -102,7 +102,7 @@ public class SensorActivity extends Activity {
             tvy = (TextView) findViewById(R.id.y_text);        // TextView for displaying y accelerations
             tvz = (TextView) findViewById(R.id.z_text);
             tvrot = (TextView) findViewById(R.id.gyroVector);
-          //  long timeInMillis = (new Date()).getTime()  + (event.timestamp - System.nanoTime()) / 1000000L;
+          //long timeInMillis = (new Date()).getTime()  + (event.timestamp - System.nanoTime()) / 1000000L;
            // String time = Long.toString(timeInMillis);
 
 
@@ -139,8 +139,9 @@ public class SensorActivity extends Activity {
                     mHistory.add(mCurrents.clone());
 
                 }
+                //Toast.makeText(getBaseContext(),"test userid:"+userText,Toast.LENGTH_SHORT).show();
                 //insert data on database
-                dataSource.insertData(userText.toString(),netForce, omegaMagnitude);
+                dataSource.insertData(userText,netForce, omegaMagnitude);
                 //  Toast.makeText(getBaseContext(),"inserted time="+time+ " trans="+netForce+" rot="+omegaMagnitude, Toast.LENGTH_SHORT).show();
 
             }
@@ -170,7 +171,7 @@ public class SensorActivity extends Activity {
 
                 tvrot.setText(" " + "rot=" + omegaMagnitude);
                 // insert data on database
-                dataSource.insertData(userText.toString(),netForce, omegaMagnitude);
+                dataSource.insertData(userText,netForce, omegaMagnitude);
                 //  Toast.makeText(getBaseContext(),"inserted time="+time+ " trans="+netForce+" rot="+omegaMagnitude, Toast.LENGTH_SHORT).show();
 
 
