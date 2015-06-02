@@ -23,7 +23,7 @@ public class DataHandler {
     public static final String TABLE_NAME="user";
     public static final String DATA_BASE_NAME="patterndb";
     public static final int DATA_BASE_VERSION=1;
-    public static final String DATABASE_CREATE="create table user(id text not null , time text not null,trans_vect float,rot_vect float);";
+    public static final String DATABASE_CREATE="create table user(id text not null ,trans_vect float,rot_vect float);";
 
     DataBaseHelper dbHelper;
     Context ctx;
@@ -70,10 +70,10 @@ public class DataHandler {
         dbHelper.close();
     }
 
-    public long insertData(String id,String time,float rotation, float translation){
+    public long insertData(String id,float rotation, float translation){
         ContentValues content=  new ContentValues();
         content.put(ID,id);
-        content.put(TIME,time);
+        //content.put(TIME,time);
         content.put(TRANS_VECT,translation);
         content.put(ROT_VECT,rotation);
 
@@ -82,6 +82,6 @@ public class DataHandler {
 
 
     public Cursor returnData(){
-        return  db.query(TABLE_NAME,new String[]{ID,TIME,TRANS_VECT,ROT_VECT},null,null,null,null,null);
+        return  db.query(TABLE_NAME,new String[]{ID,TRANS_VECT,ROT_VECT},null,null,null,null,null);
     }
 }

@@ -32,7 +32,7 @@ public class LoggedActivity extends Activity {
     TextView tv;
     String getid;
     float getTrans, getRot;
-    String getTime;
+    //String getTime;
 
     private DataHandler dataSource;
 
@@ -131,7 +131,7 @@ public class LoggedActivity extends Activity {
             }
             if (success) {
 
-                myFile = new File(Environment.getExternalStorageDirectory() + "/Exporttest_" + TimeStampDB + ".csv");
+                myFile = new File(Environment.getExternalStorageDirectory() + "/SensorData_"/* + TimeStampDB +*/ + ".csv");
                 // MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{"/export_file/Export_" + TimeStampDB + ".csv"}, null, null);
                 myFile.createNewFile();
                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -139,7 +139,7 @@ public class LoggedActivity extends Activity {
                 sendBroadcast(intent);
                 FileOutputStream fOut = new FileOutputStream(myFile);
                 OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                myOutWriter.append("ID,Time,Translation,Rotation");
+                myOutWriter.append("ID,Translation,Rotation");
                 myOutWriter.append("\n");
                 dataSource.open();
 
@@ -151,11 +151,11 @@ public class LoggedActivity extends Activity {
 
 
                             getid = c.getString(0);
-                            getTime = c.getString(1);
+                            //getTime = c.getString(1);
                             getTrans = c.getFloat(2);
                             getRot = c.getFloat(3);
 
-                            myOutWriter.append(getid + "," + getTime + "," + getTrans + "," + getRot);
+                            myOutWriter.append(getid +  "," + getTrans + "," + getRot);
                             myOutWriter.append("\n");
                         }
 
