@@ -22,7 +22,9 @@ public class DrawingActivity extends Activity {
     public void onClickButton(View v){
         String valStr = userId.getText().toString();
         Intent intent = new Intent(DrawingActivity.this, SensorActivity.class);
+        //Intent newIntent=new Intent(DrawingActivity.this,LoggedActivity.class);
         intent.putExtra("id", valStr);
+       // newIntent.putExtra("id",valStr);
         startActivity(intent);
         DrawingActivity.this.finish();
     }

@@ -32,7 +32,9 @@ public class LoggedActivity extends Activity {
     TextView tv;
     String getid;
     float getTrans, getRot;
+    String id;
     //String getTime;
+
 
     private DataHandler dataSource;
 
@@ -41,6 +43,8 @@ public class LoggedActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logged);
         dataSource = new DataHandler(this);
+        getid= (String) getIntent().getSerializableExtra("id");
+        Toast.makeText(getBaseContext(),"val="+getid,Toast.LENGTH_LONG).show();
       /*  dataSource.open();
         Cursor cursor = dataSource.returnData();
         tv = (TextView) findViewById(R.id.bdd);
@@ -135,7 +139,8 @@ public class LoggedActivity extends Activity {
             }
             if (success) {
 
-                myFile = new File(Environment.getExternalStorageDirectory() + "/export_file/SensorData"/* + TimeStampDB +*/ + ".csv");
+
+                myFile = new File(Environment.getExternalStorageDirectory() + "/export_file/"+getid+ ".csv");
                 // MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{"/export_file/Export_" + TimeStampDB + ".csv"}, null, null);
                 myFile.createNewFile();
                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -145,22 +150,27 @@ public class LoggedActivity extends Activity {
                 OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
                 myOutWriter.append("ID,Translation,Rotation");
                 myOutWriter.append("\n");
+                /*myOutWriter.append("ID,Translation,Rotation");
+                myOutWriter.append("\n");*/
                 dataSource.open();
+                Cursor c = dataSource.select(getid);
 
-                Cursor c = dataSource.returnData();
+
+
 
                 if (c != null) {
                     if (c.moveToFirst()) {
                         do {
 
-
-                            getid = c.getString(0);
+                            Toast.makeText(getBaseContext(),"id="+getid+" trouve="+c.getString(0),Toast.LENGTH_SHORT).show();
+                            id = c.getString(0);
                             //getTime = c.getString(1);
                             getTrans = c.getFloat(1);
                             getRot = c.getFloat(2);
 
                             myOutWriter.append(getid +  "," + getTrans + "," + getRot);
                             myOutWriter.append("\n");
+
                         }
 
                         while (c.moveToNext());

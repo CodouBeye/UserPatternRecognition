@@ -84,4 +84,8 @@ public class DataHandler {
     public Cursor returnData(){
         return  db.query(TABLE_NAME,new String[]{ID,TRANS_VECT,ROT_VECT},null,null,null,null,null);
     }
+
+    public Cursor select(String id){
+        return db.rawQuery("SELECT * FROM user where id=?",new String[]{id});
+    }
 }

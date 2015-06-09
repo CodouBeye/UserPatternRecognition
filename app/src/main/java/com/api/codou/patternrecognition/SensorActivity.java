@@ -79,7 +79,13 @@ public class SensorActivity extends Activity {
     int id;
 
     public void onClickButton(View v){
-        startActivity(new Intent(SensorActivity.this, LoggedActivity.class));
+        String valStr = userText;
+        Intent intent = new Intent(SensorActivity.this, LoggedActivity.class);
+        intent.putExtra("id", valStr);
+
+        startActivity(intent);
+
+       // startActivity(new Intent(SensorActivity.this, LoggedActivity.class));
         SensorActivity.this.finish();
     }
 
