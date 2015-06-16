@@ -17,13 +17,17 @@ import java.util.List;
 public class DataHandler {
 
     public  static final String ID= "id";
-    public static final String  ROT_VECT= "rot_vect";
-    public static final String  TRANS_VECT= "trans_vect";
+    public static final String  ROT_X= "rot_x";
+    public static final String  ROT_Y= "rot_y";
+    public static final String  ROT_Z= "rot_z";
+    public static final String  TRANS_X= "trans_x";
+    public static final String  TRANS_Y= "trans_y";
+    public static final String  TRANS_Z= "trans_z";
     public static final String  TIME= "time";
     public static final String TABLE_NAME="user";
     public static final String DATA_BASE_NAME="patterndb";
     public static final int DATA_BASE_VERSION=1;
-    public static final String DATABASE_CREATE="create table user(id text not null,trans_vect float,rot_vect float);";
+    public static final String DATABASE_CREATE="create table user(id text not null,time text not null,trans_x float,trans_y float,trans_z float, rot_x float,rot_y float,rot_z float);";
 
     DataBaseHelper dbHelper;
     Context ctx;
@@ -70,19 +74,22 @@ public class DataHandler {
         dbHelper.close();
     }
 
-    public long insertData(String id,float rotation, float translation){
+    public long insertData(String id,String time, float transx ,float transy,float transz,float rotx,float roty,float rotz){
         ContentValues content=  new ContentValues();
         content.put(ID,id);
-        //content.put(TIME,time);
-        content.put(TRANS_VECT,translation);
-        content.put(ROT_VECT,rotation);
-
+        content.put(TIME,time);
+        content.put(TRANS_X,transx);
+        content.put(TRANS_Y,transy);
+        content.put(TRANS_Z,transz);
+        content.put(ROT_X,rotx);
+        content.put(ROT_Y,roty);
+        content.put(ROT_Z,rotz);
         return db.insertOrThrow(TABLE_NAME,null,content);
     }
 
 
     public Cursor returnData(){
-        return  db.query(TABLE_NAME,new String[]{ID,TRANS_VECT,ROT_VECT},null,null,null,null,null);
+        return  db.query(TABLE_NAME,new String[]{ID,TIME,TRANS_X,TRANS_Y,TRANS_Z,ROT_X,ROT_Y,ROT_Z},null,null,null,null,null);
     }
 
     public Cursor select(String id){

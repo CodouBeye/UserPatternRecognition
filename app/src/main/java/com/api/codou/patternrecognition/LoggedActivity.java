@@ -31,9 +31,9 @@ import java.util.List;
 public class LoggedActivity extends Activity {
     TextView tv;
     String getid;
-    float getTrans, getRot;
+    float getTransx,getTransy,getTransz, getRotx,getRoty,getRotz;
     String id;
-    //String getTime;
+    String getTime;
 
 
     private DataHandler dataSource;
@@ -108,7 +108,7 @@ public class LoggedActivity extends Activity {
 
         try {
 
-            final File folder = new File(Environment.getExternalStorageDirectory() + "/export_file");
+            final File folder = new File(Environment.getExternalStorageDirectory() + "/export");
             //MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{folder.getAbsolutePath()},null,null);
 
 
@@ -140,7 +140,7 @@ public class LoggedActivity extends Activity {
             if (success) {
 
 
-                myFile = new File(Environment.getExternalStorageDirectory() + "/export_file/"+getid+ ".csv");
+                myFile = new File(Environment.getExternalStorageDirectory() + "/export/"+getid+ ".csv");
                 // MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{"/export_file/Export_" + TimeStampDB + ".csv"}, null, null);
                 myFile.createNewFile();
                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -148,7 +148,7 @@ public class LoggedActivity extends Activity {
                 sendBroadcast(intent);
                 FileOutputStream fOut = new FileOutputStream(myFile);
                 OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                myOutWriter.append("ID,Translation,Rotation");
+                myOutWriter.append("ID,Time,TransX,TransY,TransZ,RotX,rotY,rotZ");
                 myOutWriter.append("\n");
                 /*myOutWriter.append("ID,Translation,Rotation");
                 myOutWriter.append("\n");*/
@@ -162,13 +162,17 @@ public class LoggedActivity extends Activity {
                     if (c.moveToFirst()) {
                         do {
 
-                            Toast.makeText(getBaseContext(),"id="+getid+" trouve="+c.getString(0),Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getBaseContext(),"id="+getid+" trouve="+c.getString(0),Toast.LENGTH_SHORT).show();
                             id = c.getString(0);
-                            //getTime = c.getString(1);
-                            getTrans = c.getFloat(1);
-                            getRot = c.getFloat(2);
+                            getTime = c.getString(1);
+                            getTransx = c.getFloat(2);
+                            getTransy = c.getFloat(3);
+                            getTransz = c.getFloat(4);
+                            getRotx = c.getFloat(5);
+                            getRoty = c.getFloat(6);
+                            getRotz = c.getFloat(7);
 
-                            myOutWriter.append(getid +  "," + getTrans + "," + getRot);
+                            myOutWriter.append(getid +  "," +getTime+","+ getTransx + "," + getTransy+ "," +getTransz+"," + getRotx +","+ getRoty +","+ getRotz);
                             myOutWriter.append("\n");
 
                         }

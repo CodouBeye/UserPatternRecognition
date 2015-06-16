@@ -73,8 +73,16 @@ public class SensorActivity extends Activity {
     private float timestamp;
     Calendar rightNow = Calendar.getInstance();
     public DataHandler dataSource;
-    float netForce = 0;
+    //float netForce = 0;
     float omegaMagnitude=0;
+    float rotX =0;
+    float rotY = 0;
+    float rotZ = 0;
+    float transX =0;
+    float transY = 0;
+    float transZ = 0;
+
+
     String userText=null;
     int id;
 
@@ -108,8 +116,8 @@ public class SensorActivity extends Activity {
             tvy = (TextView) findViewById(R.id.y_text);        // TextView for displaying y accelerations
             tvz = (TextView) findViewById(R.id.z_text);
             tvrot = (TextView) findViewById(R.id.gyroVector);
-          //long timeInMillis = (new Date()).getTime()  + (event.timestamp - System.nanoTime()) / 1000000L;
-           // String time = Long.toString(timeInMillis);
+            long timeInMillis = (new Date()).getTime()  + (event.timestamp - System.nanoTime()) / 1000000L;
+            String time = Long.toString(timeInMillis);
 
 
 
@@ -126,13 +134,16 @@ public class SensorActivity extends Activity {
                 tvz.setText(" " + "z=" + event.values[2]);
 
                 //Total acceleration will be sqrt(x^2+y^2+z^2)
-                netForce=event.values[0]*event.values[0];    //X axis
-                netForce+=event.values[1]*event.values[1];    //Y axis
-                netForce+=(event.values[2])*(event.values[2]);    //Z axis (upwards)
+               // netForce=event.values[0]*event.values[0];    //X axis
+                //netForce+=event.values[1]*event.values[1];    //Y axis
+                //netForce+=(event.values[2])*(event.values[2]);    //Z axis (upwards)
 
-                netForce = (float)(Math.sqrt(netForce) - SensorManager.GRAVITY_EARTH);    //Take the square root, minus gravity
+                //netForce = (float)(Math.sqrt(netForce) - SensorManager.GRAVITY_EARTH);    //Take the square root, minus gravity
 
-
+                transX=event.values[0];    //X axis
+                transY=event.values[1];    //Y axis
+                transZ=event.values[2];    //Z axis (upwards)
+              //  Toast.makeText(getBaseContext(),"tet="+transX+","+transY+","+transZ,Toast.LENGTH_SHORT).show();
                 synchronized (this) {
                                 /* 	Synchronized thread: if the size of the mHistory concurrent linked queue is greater
                                  *  than the specified max history size, then .poll() gets the head item
@@ -147,7 +158,7 @@ public class SensorActivity extends Activity {
                 }
                 //Toast.makeText(getBaseContext(),"test userid:"+userText,Toast.LENGTH_SHORT).show();
                 //insert data on database
-                dataSource.insertData(userText,netForce, omegaMagnitude);
+                dataSource.insertData(userText,time,transX,transY,transZ,rotX,rotY,rotZ);
                 //  Toast.makeText(getBaseContext(),"inserted time="+time+ " trans="+netForce+" rot="+omegaMagnitude, Toast.LENGTH_SHORT).show();
 
             }
@@ -159,25 +170,27 @@ public class SensorActivity extends Activity {
                 if (timestamp != 0) {
                     final float dT = (event.timestamp - timestamp) * NS2S;
                     // Axis of the rotation sample, not normalized yet.
-                    float axisX = event.values[0];
-                    float axisY = event.values[1];
-                    float axisZ = event.values[2];
+                    rotX = event.values[0];
+                    rotY = event.values[1];
+                    rotZ = event.values[2];
 
+                    //Toast.makeText(getBaseContext(),"rotatin val"+ rotX+","+rotY+","+rotZ,Toast.LENGTH_SHORT).show();
                     // Calculate the angular speed of the sample
-                    omegaMagnitude = (float)Math.sqrt(axisX*axisX + axisY*axisY + axisZ*axisZ);
+                    omegaMagnitude = (float)Math.sqrt(rotX*rotX + rotY*rotY + rotZ*rotZ);
 
                     // Normalize the rotation vector if it's big enough to get the axis
                     if (omegaMagnitude > EPSILON) {
-                        axisX /= omegaMagnitude;
-                        axisY /= omegaMagnitude;
-                        axisZ /= omegaMagnitude;
+                        rotX /= omegaMagnitude; 
+                        rotY /= omegaMagnitude;
+                        rotZ /= omegaMagnitude;
                     }
 
                 }
 
+
                 tvrot.setText(" " + "rot=" + omegaMagnitude);
                 // insert data on database
-                dataSource.insertData(userText,netForce, omegaMagnitude);
+                dataSource.insertData(userText,time,transX,transY,transZ,rotX,rotY,rotZ);
                 //  Toast.makeText(getBaseContext(),"inserted time="+time+ " trans="+netForce+" rot="+omegaMagnitude, Toast.LENGTH_SHORT).show();
 
 
