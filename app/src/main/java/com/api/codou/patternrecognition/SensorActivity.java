@@ -68,7 +68,7 @@ public class SensorActivity extends Activity {
     public static final float EPSILON = 0.000000001f;
     BufferedWriter out;
     //private FileWriter writer;
-    TextView  tvx, tvy, tvz,tvrot;	// declare TextView objects
+    TextView  tvx, tvy, tvz,tvrot,numView;	// declare TextView objects
     private static final float NS2S = 1.0f / 1000000000.0f;
     private float timestamp;
     Calendar rightNow = Calendar.getInstance();
@@ -81,8 +81,8 @@ public class SensorActivity extends Activity {
     float transX =0;
     float transY = 0;
     float transZ = 0;
-
-
+    int num= 0;
+    int nbtry=0;
     String userText=null;
     int id;
 
@@ -158,7 +158,7 @@ public class SensorActivity extends Activity {
                 }
                 //Toast.makeText(getBaseContext(),"test userid:"+userText,Toast.LENGTH_SHORT).show();
                 //insert data on database
-                dataSource.insertData(userText,time,transX,transY,transZ,rotX,rotY,rotZ);
+                dataSource.insertData(userText,num,time,transX,transY,transZ,rotX,rotY,rotZ);
                 //  Toast.makeText(getBaseContext(),"inserted time="+time+ " trans="+netForce+" rot="+omegaMagnitude, Toast.LENGTH_SHORT).show();
 
             }
@@ -190,7 +190,7 @@ public class SensorActivity extends Activity {
 
                 tvrot.setText(" " + "rot=" + omegaMagnitude);
                 // insert data on database
-                dataSource.insertData(userText,time,transX,transY,transZ,rotX,rotY,rotZ);
+                dataSource.insertData(userText,num,time,transX,transY,transZ,rotX,rotY,rotZ);
                 //  Toast.makeText(getBaseContext(),"inserted time="+time+ " trans="+netForce+" rot="+omegaMagnitude, Toast.LENGTH_SHORT).show();
 
 
@@ -230,10 +230,14 @@ public class SensorActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "MainActivity.onCreate()");
-
+       // numView= (TextView)findViewById(R.id.count);
         userText= (String) getIntent().getSerializableExtra("id");
-        // id = Integer.valueOf(userText);
+        num=getIntent().getIntExtra("numero",0);
 
+        nbtry=getIntent().getIntExtra("num",0);
+        if(nbtry<=num)num=num+1;
+        else num= nbtry;
+        //num= Integer.valueOf(mnum);
         dataSource = new DataHandler(this);
         dataSource.open();
         Log.i(TAG,"Database opened in sensorActivity");
