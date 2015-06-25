@@ -84,6 +84,16 @@
 
         </FrameLayout>
 
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/count"
+            android:layout_toRightOf="@+id/x_text"
+            android:layout_below="@+id/x_text"
+            android:layout_toLeftOf="@+id/button2"
+            android:layout_toStartOf="@+id/button2" />
+
+    </RelativeLayout>
 
     </RelativeLayout>

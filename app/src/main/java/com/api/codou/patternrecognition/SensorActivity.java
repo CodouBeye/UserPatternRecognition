@@ -316,6 +316,7 @@ public class SensorActivity extends Activity {
 
     public void onClickReset(View v){
         //onResume();
+       // v.clearAnimation();
         onRestart();
 
     }
@@ -325,12 +326,16 @@ public class SensorActivity extends Activity {
 
 
     }
+
+    //reset button will delete the actual data already registered
     public void onRestart() {
-        super.onRestart();
-        Intent intent=new Intent();
-        intent.setClass(this, this.getClass());
+       // super.onRestart();
+       // Intent intent=new Intent();
+        //intent.setClass(this, this.getClass());
         finish();
-        startActivity(intent);
+        startActivity(getIntent());
+        dataSource.deleteRes(userText,num);
+      //  startGraph();
     }
 
     @Override

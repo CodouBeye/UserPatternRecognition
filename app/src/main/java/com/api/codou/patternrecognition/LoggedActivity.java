@@ -33,6 +33,7 @@ public class LoggedActivity extends Activity {
     String getid;
     float getTransx,getTransy,getTransz, getRotx,getRoty,getRotz;
     String id;
+    int getNum;
     String getTime;
 
 
@@ -73,6 +74,20 @@ public class LoggedActivity extends Activity {
 
     public void onClickButton(View v) {
         startActivity(new Intent(LoggedActivity.this, DrawingActivity.class));
+        LoggedActivity.this.finish();
+    }
+
+    public void onRetryButton(View v) {
+        Bundle obj = new Bundle();
+        obj.putInt("num",getNum+1);
+        obj.putInt("first",1);
+        String valStr = getid ;
+        Intent intent = new Intent(LoggedActivity.this, SensorActivity.class);
+        //Intent newIntent=new Intent(DrawingActivity.this,LoggedActivity.class);
+        intent.putExtra("id", valStr);
+        intent.putExtras(obj);
+        // newIntent.putExtra("id",valStr);
+        startActivity(intent);
         LoggedActivity.this.finish();
     }
 
@@ -148,7 +163,7 @@ public class LoggedActivity extends Activity {
                 sendBroadcast(intent);
                 FileOutputStream fOut = new FileOutputStream(myFile);
                 OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                myOutWriter.append("ID,Time,TransX,TransY,TransZ,RotX,rotY,rotZ");
+                myOutWriter.append("ID,Num,Time,TransX,TransY,TransZ,RotX,RotY,RotZ");
                 myOutWriter.append("\n");
                 /*myOutWriter.append("ID,Translation,Rotation");
                 myOutWriter.append("\n");*/
@@ -164,15 +179,16 @@ public class LoggedActivity extends Activity {
 
                            // Toast.makeText(getBaseContext(),"id="+getid+" trouve="+c.getString(0),Toast.LENGTH_SHORT).show();
                             id = c.getString(0);
-                            getTime = c.getString(1);
-                            getTransx = c.getFloat(2);
-                            getTransy = c.getFloat(3);
-                            getTransz = c.getFloat(4);
-                            getRotx = c.getFloat(5);
-                            getRoty = c.getFloat(6);
-                            getRotz = c.getFloat(7);
+                            getNum= c.getInt(1);
+                            getTime = c.getString(2);
+                            getTransx = c.getFloat(3);
+                            getTransy = c.getFloat(4);
+                            getTransz = c.getFloat(5);
+                            getRotx = c.getFloat(6);
+                            getRoty = c.getFloat(7);
+                            getRotz = c.getFloat(8);
 
-                            myOutWriter.append(getid +  "," +getTime+","+ getTransx + "," + getTransy+ "," +getTransz+"," + getRotx +","+ getRoty +","+ getRotz);
+                            myOutWriter.append(getid +  ","+ getNum+ "," +getTime+","+ getTransx + "," + getTransy+ "," +getTransz+"," + getRotx +","+ getRoty +","+ getRotz);
                             myOutWriter.append("\n");
 
                         }

@@ -17,6 +17,7 @@ import java.util.List;
 public class DataHandler {
 
     public  static final String ID= "id";
+    public  static final String NUM ="num";
     public static final String  ROT_X= "rot_x";
     public static final String  ROT_Y= "rot_y";
     public static final String  ROT_Z= "rot_z";
@@ -27,7 +28,7 @@ public class DataHandler {
     public static final String TABLE_NAME="user";
     public static final String DATA_BASE_NAME="patterndb";
     public static final int DATA_BASE_VERSION=1;
-    public static final String DATABASE_CREATE="create table user(id text not null,time text not null,trans_x float,trans_y float,trans_z float, rot_x float,rot_y float,rot_z float);";
+    public static final String DATABASE_CREATE="create table user(id text not null, num integer , time text not null,trans_x float,trans_y float,trans_z float, rot_x float,rot_y float,rot_z float);";
 
     DataBaseHelper dbHelper;
     Context ctx;
@@ -74,25 +75,38 @@ public class DataHandler {
         dbHelper.close();
     }
 
-    public long insertData(String id,String time, float transx ,float transy,float transz,float rotx,float roty,float rotz){
+    public long insertData(String id,int num,String time, float transx ,float transy,float transz,float rotx,float roty,float rotz){
         ContentValues content=  new ContentValues();
         content.put(ID,id);
+        content.put(NUM,num);
         content.put(TIME,time);
         content.put(TRANS_X,transx);
         content.put(TRANS_Y,transy);
         content.put(TRANS_Z,transz);
         content.put(ROT_X,rotx);
         content.put(ROT_Y,roty);
-        content.put(ROT_Z,rotz);
+        content.put(ROT_Z, rotz);
         return db.insertOrThrow(TABLE_NAME,null,content);
     }
 
 
     public Cursor returnData(){
-        return  db.query(TABLE_NAME,new String[]{ID,TIME,TRANS_X,TRANS_Y,TRANS_Z,ROT_X,ROT_Y,ROT_Z},null,null,null,null,null);
+        return  db.query(TABLE_NAME, new String[]{ID, NUM, TIME, TRANS_X, TRANS_Y, TRANS_Z, ROT_X, ROT_Y, ROT_Z}, null, null, null, null, null);
     }
 
     public Cursor select(String id){
-        return db.rawQuery("SELECT * FROM user where id=?",new String[]{id});
+        return db.rawQuery("SELECT * FROM user where id=?", new String[]{id});
+    }
+
+    public Cursor selectMaxNum(String id){
+        return db.rawQuery("SELECT MAX(num) FROM user where id=?",new String[]{id});
+    }
+
+   /* public Cursor delete(String id ,int num){
+        return db.rawQuery("DELETE FROM user where id=? and num=?",new String[]{id,String.valueOf(num)});
+    }*/
+
+    public void deleteRes(String id, int num){
+        db.delete(TABLE_NAME,"id=? and num=?",new String[]{id,String.valueOf(num)});
     }
 }

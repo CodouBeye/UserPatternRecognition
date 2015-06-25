@@ -15,9 +15,10 @@
         android:onClick="onClickButton"
         android:text="Home"
         android:id="@+id/retry"
+        android:layout_marginTop="52dp"
         android:layout_below="@+id/message"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp" />
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignStart="@+id/button5" />
 
     <Button
         android:layout_width="wrap_content"
@@ -25,9 +26,18 @@
         android:text="CLOSE"
         android:onClick="onCloseButton"
         android:id="@+id/button5"
-        android:layout_below="@+id/retry"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_marginBottom="39dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retry"
+        android:onClick="onRetryButton"
+        android:id="@+id/retryBtn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
