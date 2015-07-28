@@ -45,7 +45,7 @@ public class LoggedActivity extends Activity {
         setContentView(R.layout.logged);
         dataSource = new DataHandler(this);
         getid= (String) getIntent().getSerializableExtra("id");
-        Toast.makeText(getBaseContext(),"val="+getid,Toast.LENGTH_LONG).show();
+
       /*  dataSource.open();
         Cursor cursor = dataSource.returnData();
         tv = (TextView) findViewById(R.id.bdd);
@@ -95,6 +95,8 @@ public class LoggedActivity extends Activity {
         finish();
         System.exit(0);
     }
+
+
     @Override
     protected void onResume() {
 
@@ -123,7 +125,7 @@ public class LoggedActivity extends Activity {
 
         try {
 
-            final File folder = new File(Environment.getExternalStorageDirectory() + "/export");
+            final File folder = new File(Environment.getExternalStorageDirectory() + "/DATAS");
             //MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{folder.getAbsolutePath()},null,null);
 
 
@@ -155,7 +157,7 @@ public class LoggedActivity extends Activity {
             if (success) {
 
 
-                myFile = new File(Environment.getExternalStorageDirectory() + "/export/"+getid+ ".csv");
+                myFile = new File(Environment.getExternalStorageDirectory() + "/DATAS/"+getid+ ".csv");
                 // MediaScannerConnection.scanFile(LoggedActivity.this, new String[]{"/export_file/Export_" + TimeStampDB + ".csv"}, null, null);
                 myFile.createNewFile();
                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);

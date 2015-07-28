@@ -98,13 +98,17 @@ public class DataHandler {
         return db.rawQuery("SELECT * FROM user where id=?", new String[]{id});
     }
 
+    public Cursor selectIds(){
+        return db.rawQuery("SELECT DISTINCT id from user",null);
+    }
+
     public Cursor selectMaxNum(String id){
         return db.rawQuery("SELECT MAX(num) FROM user where id=?",new String[]{id});
     }
 
-   /* public Cursor delete(String id ,int num){
-        return db.rawQuery("DELETE FROM user where id=? and num=?",new String[]{id,String.valueOf(num)});
-    }*/
+    public Cursor selectByIdNum(String id ,int num){
+        return db.rawQuery("SELECT * FROM user where id=? and num=?",new String[]{id,String.valueOf(num)});
+    }
 
     public void deleteRes(String id, int num){
         db.delete(TABLE_NAME,"id=? and num=?",new String[]{id,String.valueOf(num)});

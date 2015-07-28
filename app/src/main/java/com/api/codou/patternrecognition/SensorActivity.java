@@ -90,9 +90,7 @@ public class SensorActivity extends Activity {
         String valStr = userText;
         Intent intent = new Intent(SensorActivity.this, LoggedActivity.class);
         intent.putExtra("id", valStr);
-
         startActivity(intent);
-
        // startActivity(new Intent(SensorActivity.this, LoggedActivity.class));
         SensorActivity.this.finish();
     }
@@ -319,6 +317,7 @@ public class SensorActivity extends Activity {
        // v.clearAnimation();
         onRestart();
 
+
     }
 
     public void onClickStartButton(View v){
@@ -327,14 +326,21 @@ public class SensorActivity extends Activity {
 
     }
 
+    public void abortButton(View v){
+        dataSource.deleteRes(userText, num);
+        finish();
+        System.exit(0);
+    }
     //reset button will delete the actual data already registered
     public void onRestart() {
-       // super.onRestart();
+       super.onRestart();
        // Intent intent=new Intent();
         //intent.setClass(this, this.getClass());
+       // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         finish();
         startActivity(getIntent());
-        dataSource.deleteRes(userText,num);
+        dataSource.deleteRes(userText, num);
       //  startGraph();
     }
 

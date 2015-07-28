@@ -7,5 +7,11 @@
     <color name="acc_y">#00FF4C</color>  <!-- green -->
     <color name="acc_z">#004CFF</color>	<!-- blue -->
     <color name="acc_r">#FFEE00</color>	<!-- yellow -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#E8EAF6</color>
+    <color name="navigationBarColor">#0D47A1</color>
+    <color name="colorAccent">#0D47A1</color>
 
 </resources>

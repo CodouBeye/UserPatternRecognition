@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Registration" />
 
     <Button
         android:layout_width="wrap_content"
@@ -18,7 +14,8 @@
         android:layout_centerVertical="true"
         android:onClick="onClickButton"
         android:text="@string/accelerometer"
-        android:id="@+id/button4" />
+        android:id="@+id/button4"
+        style="@style/Button" />
 
 
     <EditText
@@ -30,6 +27,18 @@
         android:id="@+id/userId"
         android:layout_above="@+id/button4"
         android:layout_centerHorizontal="true" />
+
+  <!--  <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export"
+        android:id="@+id/button7"
+        android:onClick="exportData"
+        android:layout_marginTop="74dp"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true" />-->
+
+
 
 
 </RelativeLayout>

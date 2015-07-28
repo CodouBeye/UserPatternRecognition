@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_action_name2">
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:layout_gravity="center"
         android:text="You have been registrated!!" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="150dp">
 
     <Button
         android:layout_width="wrap_content"
@@ -15,10 +25,12 @@
         android:onClick="onClickButton"
         android:text="Home"
         android:id="@+id/retry"
-        android:layout_marginTop="52dp"
+        style="@style/Button"
         android:layout_below="@+id/message"
         android:layout_alignLeft="@+id/button5"
-        android:layout_alignStart="@+id/button5" />
+        android:layout_alignStart="@+id/button5"
+        android:layout_marginTop="91dp" />
+
 
     <Button
         android:layout_width="wrap_content"
@@ -28,7 +40,8 @@
         android:id="@+id/button5"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="39dp" />
+        android:layout_marginBottom="39dp"
+        style="@style/Button"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -36,8 +49,11 @@
         android:text="Retry"
         android:onClick="onRetryButton"
         android:id="@+id/retryBtn"
+        style="@style/Button"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignStart="@+id/button5" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

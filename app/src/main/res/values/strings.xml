@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">DrawApp</string>
+    <string name="app_name">DrawInTheAir</string>
     <string name="accelerometer">Sign</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Help</string>
     <string name="x">X: </string>
     <string name="y">Y: </string>
     <string name="z">Z: </string>
@@ -10,4 +10,7 @@
     <string name="stop">STOP</string>
     <string name="save">SEND</string>
     <string name="database">User drawing data</string>
+
+
+
 </resources>
